@@ -66,6 +66,7 @@ const images = [
   
 const gallery = document.querySelector(".gallery");
 
+
 function createGallery(arr) {
     return arr.map((img) => `
     <li class="gallery-item">
@@ -87,9 +88,24 @@ gallery.style.flexWrap = "wrap";
 gallery.style.gap = "20px 24px";
 
 gallery.insertAdjacentHTML("beforeend", createGallery(images));
+gallery.addEventListener("click", handleClick);
 
 const galleryItem = document.querySelectorAll(".gallery-item");
 
 galleryItem.forEach(item => {
   item.style.flexBasis = "calc((100% - 48px) / 3)";
 });
+
+function handleClick(event) {
+  event.preventDefault();
+  if (event.target.classList.contains("gallery")) {
+    return;
+  }
+  console.log(event.target.dataset.source);
+
+  const instance = basicLightbox.create(`
+    <img src="${event.target.dataset.source}"/>
+    `);
+  
+    instance.show();
+}
