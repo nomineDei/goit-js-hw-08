@@ -98,7 +98,7 @@ galleryItem.forEach(item => {
 
 function handleClick(event) {
   event.preventDefault();
-  if (event.target.classList.contains("gallery")) {
+  if (event.target.tagName.toLowerCase() !== "img") {
     return;
   }
 
